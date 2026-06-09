@@ -1,0 +1,50 @@
+graph TD
+    Start([🚀 Start Application]) --> Initialize[Initialize Session State & Chat History]
+    Initialize --> Welcome[👋 Display Welcome Message & Load Sidebar Menu]
+    
+    Welcome --> Input{💬 User Action}
+    
+    Input -->|Type Custom Text| Match[Analyze Input: match_intent]
+    Input -->|Click Sidebar Quick Link| QuickLink[Trigger Predefined Category Query]
+    
+    QuickLink --> Timings[🕒 Campus Timings Response]
+    QuickLink --> Depts[🏢 Departments Response]
+    QuickLink --> Library[📚 Library Info Response]
+    QuickLink --> Exams[📝 Exam Cell Response]
+    QuickLink --> Contact[📞 Contacts & Location Response]
+    QuickLink --> Admissions[🎓 Admission & Fee Response]
+    QuickLink --> Facilities[🏗️ Campus Facilities Response]
+
+    Match -->|Greeting Match| Greet[👋 Display Polite Hello & Help Options]
+    Match -->|Keyword Match: timings| Timings
+    Match -->|Keyword Match: departments/branches| Depts
+    Match -->|Keyword Match: library/books| Library
+    Match -->|Keyword Match: exams/tests| Exams
+    Match -->|Keyword Match: contact/phone/email| Contact
+    Match -->|Keyword Match: admission/fees| Admissions
+    Match -->|Keyword Match: facilities/hostel/canteen| Facilities
+    Match -->|No Match / Unknown Query| Fallback[🕵️‍♂️ Display Fallback Message with Suggested Topics]
+
+    Timings --> SaveHistory[Save Query & Response to History]
+    Depts --> SaveHistory
+    Library --> SaveHistory
+    Exams --> SaveHistory
+    Contact --> SaveHistory
+    Admissions --> SaveHistory
+    Facilities --> SaveHistory
+    Greet --> SaveHistory
+    Fallback --> SaveHistory
+
+    SaveHistory --> Feedback{✍️ User Submits Feedback?}
+    Feedback -->|Yes| SaveFeedback[Save Feedback in Session]
+    Feedback -->|No| WaitInput[Wait for next User Query]
+    
+    SaveFeedback --> WaitInput
+    WaitInput --> Input
+
+    style Start fill:#4CAF50,stroke:#2E7D32,stroke-width:2px,color:#fff
+    style Welcome fill:#2196F3,stroke:#1565C0,stroke-width:2px,color:#fff
+    style Input fill:#FF9800,stroke:#EF6C00,stroke-width:2px,color:#fff
+    style Match fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:#fff
+    style Fallback fill:#e53935,stroke:#c62828,stroke-width:2px,color:#fff
+    style SaveHistory fill:#009688,stroke:#00695C,stroke-width:2px,color:#fff
